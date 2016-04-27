@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Numerics;
+using System.Collections;
+using System.Security.Cryptography;
 
 namespace RSA_App
 {
@@ -15,7 +17,7 @@ namespace RSA_App
     {
         //globals
         BigInteger nValue = 1;
-        int tValue = 1;
+        BigInteger tValue = 1;
         BigInteger dValue = 1;
         BigInteger eValue;
 
@@ -57,25 +59,9 @@ namespace RSA_App
             }        
         }
 
-        //checks if number is prime
-        private Boolean isPrime(int number)
-        {
 
-            if (number == 1) return false;
-            if (number == 2) return true;
 
-            if (number % 2 == 0) return false; //Even number     
-
-            for (int i = 3; i < number; i += 2)
-            {
-                if (number % i == 0) return false;
-            }
-
-            return true;
-
-        }
-
-        public static int GetGCDByModulus(int value1, int value2)
+        public static BigInteger GetGCDByModulus(BigInteger value1, BigInteger value2)
         {
             while (value1 != 0 && value2 != 0)
             {
@@ -84,34 +70,30 @@ namespace RSA_App
                 else
                     value2 %= value1;
             }
-            return Math.Max(value1, value2);
+            return BigInteger.Max(value1, value2);
         }
 
-        public static bool Coprime(int value1, int value2)
+        public static bool Coprime(BigInteger value1, BigInteger value2)
         {
             return GetGCDByModulus(value1, value2) == 1;
-        }
-
-        //ignore
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
         }
 
         private void buttonCheckPrime_Click(object sender, EventArgs e)
         {
             try
             {
-                int n1 = int.Parse(textPrimeOne.Text);
-                int n2 = int.Parse(textPrimeTwo.Text);
+                //variables
+                BigInteger n1 = BigInteger.Parse(textPrimeOne.Text);
+                BigInteger n2 = BigInteger.Parse(textPrimeTwo.Text);
                 string responseS = "";
 
                 Boolean n1b = false;
                 Boolean n2b = false;
 
-                n1b = isPrime(n1);
-                n2b = isPrime(n2);
+                n1b = BigIntegerExtensions.IsProbablePrime(n1, 1);
+                n2b = BigIntegerExtensions.IsProbablePrime(n2, 2);
 
+                //checks for both primes, 1 is prime, or none is prime then shows message based on that. If both are prime does math
                 if (n1b && n2b)
                 {
                     responseS = "Both numbers are prime numbers";
@@ -156,14 +138,15 @@ namespace RSA_App
 
         private void buttonCheckE_Click(object sender, EventArgs e)
         {
-
             try
             {
-                int eCheckVal = 0;
-                eCheckVal = int.Parse(tbEValue.Text);
+                //variables
+                BigInteger eCheckVal = 0;
+                eCheckVal = BigInteger.Parse(tbEValue.Text);
                 Boolean coPrimeChecker = Coprime(tValue, eCheckVal);
                 Boolean totientChecker = false;
 
+                //checks for coprime and within range, if true performs calculations
                 if (1 < eCheckVal && eCheckVal < tValue)
                 {
                     totientChecker = true;
@@ -177,7 +160,7 @@ namespace RSA_App
                 {
                     tbCheckE.Text = "The value is coprime and is between 1 and the totient";
 
-                    eValue = int.Parse(tbEValue.Text);
+                    eValue = BigInteger.Parse(tbEValue.Text);
 
                     BigInteger qq = BigInteger.Multiply(tValue, nValue);
                     BigInteger qw = BigInteger.Multiply(tValue, qq);
@@ -211,6 +194,7 @@ namespace RSA_App
                 if (string.IsNullOrWhiteSpace(tbTValue.Text)) { responseString = responseString + "No t value found; "; }
                 if (string.IsNullOrWhiteSpace(tbNValue.Text)) { responseString = responseString + "No n value found; "; }
                 MessageBox.Show(responseString);
+                MessageBox.Show(ex.Message.ToString());
             }
         }
 
@@ -218,6 +202,7 @@ namespace RSA_App
         {
             try
             {
+                //variables and sends data if all calculatiosn have been performed
                 if (nCheck == 1 & dCheck == 1 && tCheck == 1)
                 {
                     fNValue = nValue;
@@ -269,7 +254,43 @@ namespace RSA_App
                 MessageBox.Show("Sending of variables failed");
             }
         }
+
+        //small prime numbers
+        private void button1_Click(object sender, EventArgs e)
+        {
+            BigInteger a = 151;
+            BigInteger b = 349;
+            BigInteger c = 8219;
+
+            textPrimeOne.Text = a.ToString();
+            textPrimeTwo.Text = b.ToString();
+            tbEValue.Text = c.ToString();
+        }
+
+        //medium prime numbers
+        private void btnMediumPrime_Click(object sender, EventArgs e)
+        {
+            BigInteger a = 65499743;
+            BigInteger b = 324899387;
+            BigInteger c = 724897567;
+
+            textPrimeOne.Text = a.ToString();
+            textPrimeTwo.Text = b.ToString();
+            tbEValue.Text = c.ToString();
+        }
+
+        //large prime numbers
+        private void btnLargePrime_Click(object sender, EventArgs e)
+        {
+            BigInteger a = 92489625259;
+            BigInteger b = 424896219269;
+            BigInteger c = 965495171351;
+
+            textPrimeOne.Text = a.ToString();
+            textPrimeTwo.Text = b.ToString();
+            tbEValue.Text = c.ToString();
+        }     
+
+        
     }
-
-
 }

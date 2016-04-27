@@ -47,20 +47,20 @@
             this.decryptionMessage = new System.Windows.Forms.TextBox();
             this.repeatEncryptedHex = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.tbValueE = new System.Windows.Forms.TextBox();
-            this.tbValueN = new System.Windows.Forms.TextBox();
-            this.tbValueD = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.tbValueD = new System.Windows.Forms.TextBox();
+            this.tbValueN = new System.Windows.Forms.TextBox();
+            this.tbValueE = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.tbSimpleE = new System.Windows.Forms.TextBox();
-            this.tbSimpleN = new System.Windows.Forms.TextBox();
-            this.tbSimpleD = new System.Windows.Forms.TextBox();
             this.buttonSimpleValues = new System.Windows.Forms.Button();
+            this.tbSimpleD = new System.Windows.Forms.TextBox();
+            this.tbSimpleN = new System.Windows.Forms.TextBox();
+            this.tbSimpleE = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.buttonExplain = new System.Windows.Forms.Button();
             this.buttonCalculateValues = new System.Windows.Forms.Button();
             this.buttonSync = new System.Windows.Forms.Button();
@@ -77,7 +77,6 @@
             this.encryptionInput.Name = "encryptionInput";
             this.encryptionInput.Size = new System.Drawing.Size(272, 117);
             this.encryptionInput.TabIndex = 0;
-            this.encryptionInput.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // groupBox1
             // 
@@ -262,41 +261,14 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Values for Calculation";
             // 
-            // tbValueE
+            // label9
             // 
-            this.tbValueE.Location = new System.Drawing.Point(82, 19);
-            this.tbValueE.Multiline = true;
-            this.tbValueE.Name = "tbValueE";
-            this.tbValueE.ReadOnly = true;
-            this.tbValueE.Size = new System.Drawing.Size(209, 61);
-            this.tbValueE.TabIndex = 0;
-            // 
-            // tbValueN
-            // 
-            this.tbValueN.Location = new System.Drawing.Point(82, 86);
-            this.tbValueN.Multiline = true;
-            this.tbValueN.Name = "tbValueN";
-            this.tbValueN.ReadOnly = true;
-            this.tbValueN.Size = new System.Drawing.Size(209, 61);
-            this.tbValueN.TabIndex = 1;
-            // 
-            // tbValueD
-            // 
-            this.tbValueD.Location = new System.Drawing.Point(82, 152);
-            this.tbValueD.Multiline = true;
-            this.tbValueD.Name = "tbValueD";
-            this.tbValueD.ReadOnly = true;
-            this.tbValueD.Size = new System.Drawing.Size(209, 61);
-            this.tbValueD.TabIndex = 2;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(30, 44);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(46, 13);
-            this.label7.TabIndex = 3;
-            this.label7.Text = "Value: e";
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(30, 180);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(46, 13);
+            this.label9.TabIndex = 5;
+            this.label9.Text = "Value: d";
             // 
             // label8
             // 
@@ -307,14 +279,41 @@
             this.label8.TabIndex = 4;
             this.label8.Text = "Value: n";
             // 
-            // label9
+            // label7
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(30, 180);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(46, 13);
-            this.label9.TabIndex = 5;
-            this.label9.Text = "Value: d";
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(30, 44);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(46, 13);
+            this.label7.TabIndex = 3;
+            this.label7.Text = "Value: e";
+            // 
+            // tbValueD
+            // 
+            this.tbValueD.Location = new System.Drawing.Point(82, 152);
+            this.tbValueD.Multiline = true;
+            this.tbValueD.Name = "tbValueD";
+            this.tbValueD.ReadOnly = true;
+            this.tbValueD.Size = new System.Drawing.Size(209, 61);
+            this.tbValueD.TabIndex = 2;
+            // 
+            // tbValueN
+            // 
+            this.tbValueN.Location = new System.Drawing.Point(82, 86);
+            this.tbValueN.Multiline = true;
+            this.tbValueN.Name = "tbValueN";
+            this.tbValueN.ReadOnly = true;
+            this.tbValueN.Size = new System.Drawing.Size(209, 61);
+            this.tbValueN.TabIndex = 1;
+            // 
+            // tbValueE
+            // 
+            this.tbValueE.Location = new System.Drawing.Point(82, 19);
+            this.tbValueE.Multiline = true;
+            this.tbValueE.Name = "tbValueE";
+            this.tbValueE.ReadOnly = true;
+            this.tbValueE.Size = new System.Drawing.Size(209, 61);
+            this.tbValueE.TabIndex = 0;
             // 
             // groupBox4
             // 
@@ -332,23 +331,36 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Simple Values";
             // 
-            // label10
+            // buttonSimpleValues
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(16, 22);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(46, 13);
-            this.label10.TabIndex = 4;
-            this.label10.Text = "Value: e";
+            this.buttonSimpleValues.Location = new System.Drawing.Point(19, 102);
+            this.buttonSimpleValues.Name = "buttonSimpleValues";
+            this.buttonSimpleValues.Size = new System.Drawing.Size(201, 36);
+            this.buttonSimpleValues.TabIndex = 10;
+            this.buttonSimpleValues.Text = "Set Values";
+            this.buttonSimpleValues.UseVisualStyleBackColor = true;
+            this.buttonSimpleValues.Click += new System.EventHandler(this.buttonSimpleValues_Click);
             // 
-            // label11
+            // tbSimpleD
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(16, 48);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(46, 13);
-            this.label11.TabIndex = 6;
-            this.label11.Text = "Value: n";
+            this.tbSimpleD.Location = new System.Drawing.Point(68, 71);
+            this.tbSimpleD.Name = "tbSimpleD";
+            this.tbSimpleD.Size = new System.Drawing.Size(152, 20);
+            this.tbSimpleD.TabIndex = 9;
+            // 
+            // tbSimpleN
+            // 
+            this.tbSimpleN.Location = new System.Drawing.Point(68, 45);
+            this.tbSimpleN.Name = "tbSimpleN";
+            this.tbSimpleN.Size = new System.Drawing.Size(152, 20);
+            this.tbSimpleN.TabIndex = 8;
+            // 
+            // tbSimpleE
+            // 
+            this.tbSimpleE.Location = new System.Drawing.Point(68, 19);
+            this.tbSimpleE.Name = "tbSimpleE";
+            this.tbSimpleE.Size = new System.Drawing.Size(152, 20);
+            this.tbSimpleE.TabIndex = 7;
             // 
             // label12
             // 
@@ -359,36 +371,23 @@
             this.label12.TabIndex = 6;
             this.label12.Text = "Value: d";
             // 
-            // tbSimpleE
+            // label11
             // 
-            this.tbSimpleE.Location = new System.Drawing.Point(68, 19);
-            this.tbSimpleE.Name = "tbSimpleE";
-            this.tbSimpleE.Size = new System.Drawing.Size(152, 20);
-            this.tbSimpleE.TabIndex = 7;
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(16, 48);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(46, 13);
+            this.label11.TabIndex = 6;
+            this.label11.Text = "Value: n";
             // 
-            // tbSimpleN
+            // label10
             // 
-            this.tbSimpleN.Location = new System.Drawing.Point(68, 45);
-            this.tbSimpleN.Name = "tbSimpleN";
-            this.tbSimpleN.Size = new System.Drawing.Size(152, 20);
-            this.tbSimpleN.TabIndex = 8;
-            // 
-            // tbSimpleD
-            // 
-            this.tbSimpleD.Location = new System.Drawing.Point(68, 71);
-            this.tbSimpleD.Name = "tbSimpleD";
-            this.tbSimpleD.Size = new System.Drawing.Size(152, 20);
-            this.tbSimpleD.TabIndex = 9;
-            // 
-            // buttonSimpleValues
-            // 
-            this.buttonSimpleValues.Location = new System.Drawing.Point(19, 102);
-            this.buttonSimpleValues.Name = "buttonSimpleValues";
-            this.buttonSimpleValues.Size = new System.Drawing.Size(201, 36);
-            this.buttonSimpleValues.TabIndex = 10;
-            this.buttonSimpleValues.Text = "Set Values";
-            this.buttonSimpleValues.UseVisualStyleBackColor = true;
-            this.buttonSimpleValues.Click += new System.EventHandler(this.buttonSimpleValues_Click);
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(16, 22);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(46, 13);
+            this.label10.TabIndex = 4;
+            this.label10.Text = "Value: e";
             // 
             // buttonExplain
             // 

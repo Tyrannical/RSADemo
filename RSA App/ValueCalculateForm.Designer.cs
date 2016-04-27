@@ -37,6 +37,7 @@
             this.buttonCheckPrime = new System.Windows.Forms.Button();
             this.textBoxPrimeRespone = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnSmallPrimes = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -62,6 +63,8 @@
             this.tbSendE = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tbSendN = new System.Windows.Forms.TextBox();
+            this.btnMediumPrime = new System.Windows.Forms.Button();
+            this.btnLargePrime = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -148,6 +151,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnLargePrime);
+            this.groupBox1.Controls.Add(this.btnMediumPrime);
+            this.groupBox1.Controls.Add(this.btnSmallPrimes);
             this.groupBox1.Controls.Add(this.textBox2);
             this.groupBox1.Controls.Add(this.textBoxPrimeRespone);
             this.groupBox1.Controls.Add(this.textPrimeOne);
@@ -161,6 +167,16 @@
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Prime Values";
+            // 
+            // btnSmallPrimes
+            // 
+            this.btnSmallPrimes.Location = new System.Drawing.Point(6, 92);
+            this.btnSmallPrimes.Name = "btnSmallPrimes";
+            this.btnSmallPrimes.Size = new System.Drawing.Size(79, 39);
+            this.btnSmallPrimes.TabIndex = 9;
+            this.btnSmallPrimes.Text = "Small";
+            this.btnSmallPrimes.UseVisualStyleBackColor = true;
+            this.btnSmallPrimes.Click += new System.EventHandler(this.button1_Click);
             // 
             // groupBox2
             // 
@@ -186,7 +202,6 @@
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Calculations";
-            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // pictureBox2
             // 
@@ -282,7 +297,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(470, 113);
+            this.label4.Location = new System.Drawing.Point(428, 113);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(52, 13);
             this.label4.TabIndex = 17;
@@ -290,11 +305,11 @@
             // 
             // tbTValue
             // 
-            this.tbTValue.Location = new System.Drawing.Point(528, 105);
+            this.tbTValue.Location = new System.Drawing.Point(486, 105);
             this.tbTValue.Multiline = true;
             this.tbTValue.Name = "tbTValue";
             this.tbTValue.ReadOnly = true;
-            this.tbTValue.Size = new System.Drawing.Size(91, 28);
+            this.tbTValue.Size = new System.Drawing.Size(192, 28);
             this.tbTValue.TabIndex = 16;
             this.tbTValue.TabStop = false;
             // 
@@ -433,6 +448,26 @@
             this.tbSendN.TabIndex = 16;
             this.tbSendN.TabStop = false;
             // 
+            // btnMediumPrime
+            // 
+            this.btnMediumPrime.Location = new System.Drawing.Point(91, 92);
+            this.btnMediumPrime.Name = "btnMediumPrime";
+            this.btnMediumPrime.Size = new System.Drawing.Size(79, 39);
+            this.btnMediumPrime.TabIndex = 10;
+            this.btnMediumPrime.Text = "Medium";
+            this.btnMediumPrime.UseVisualStyleBackColor = true;
+            this.btnMediumPrime.Click += new System.EventHandler(this.btnMediumPrime_Click);
+            // 
+            // btnLargePrime
+            // 
+            this.btnLargePrime.Location = new System.Drawing.Point(176, 92);
+            this.btnLargePrime.Name = "btnLargePrime";
+            this.btnLargePrime.Size = new System.Drawing.Size(79, 39);
+            this.btnLargePrime.TabIndex = 11;
+            this.btnLargePrime.Text = "Large";
+            this.btnLargePrime.UseVisualStyleBackColor = true;
+            this.btnLargePrime.Click += new System.EventHandler(this.btnLargePrime_Click);
+            // 
             // ValueCalculateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -494,6 +529,9 @@
         private System.Windows.Forms.TextBox tbSendE;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox tbSendN;
+        private System.Windows.Forms.Button btnSmallPrimes;
+        private System.Windows.Forms.Button btnLargePrime;
+        private System.Windows.Forms.Button btnMediumPrime;
 
     }
 }

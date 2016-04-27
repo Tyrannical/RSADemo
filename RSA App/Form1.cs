@@ -19,13 +19,15 @@ namespace RSA_App
         BigInteger[] encryptedArray;
         BigInteger valueE, valueN, valueD;
         
+        string[] hexArrayUnencrypted;
+        BigInteger[] decryptedArray;
+        
 
         public PrimaryForm()
         {
             InitializeComponent();
         }
-
-        
+       
         //converts a string to a hex string
         public static string fToHexString(string str)
         {
@@ -36,110 +38,201 @@ namespace RSA_App
             return hexString.ToString();
         }
 
-        //converts a hex string to a normal string
-        public static string HexStringToString(string hexString)
+        public static string ConvertHexToString(string HexValue)
         {
-            if (hexString == null || (hexString.Length & 1) == 1)
+            string StrValue = "";
+            while (HexValue.Length > 0)
             {
-                throw new ArgumentException();
+                StrValue += System.Convert.ToChar(System.Convert.ToUInt32(HexValue.Substring(0, 2), 16)).ToString();
+                HexValue = HexValue.Substring(2, HexValue.Length - 2);
             }
-            var sb = new StringBuilder();
-            for (var i = 0; i < hexString.Length; i += 2)
-            {
-                var hexChar = hexString.Substring(i, 2);
-                sb.Append((char)Convert.ToByte(hexChar, 16));
-            }
-            return sb.ToString();
-        }
-
-        //ignore
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
+            return StrValue;
         }
 
         //converts message to hex
         private void buttonToHex_Click(object sender, EventArgs e)
         {
-            initialMessage = encryptionInput.Text;
+            try
+            {
+                //general string from message box
+                initialMessage = encryptionInput.Text;
 
-            string hexString = fToHexString(initialMessage);
-            hexValueS = hexString;
+                //variables, string to char array
+                char[] charArrayInitialMessage = initialMessage.ToCharArray();
+                string[] hexStringArrayOfChar = new string[charArrayInitialMessage.Length];
+                string[] a1 = new string[charArrayInitialMessage.Length];
+                string g = "";
 
-            hexValue.Text = hexString;
+                //char array to string array
+                for (int i = 0; i < charArrayInitialMessage.Length; i++)
+                {
+                    a1[i] = charArrayInitialMessage[i].ToString();
+                }
+
+                //convert each element of string array to hex array
+                for (int i = 0; i < charArrayInitialMessage.Length; i++)
+                {
+                    hexStringArrayOfChar[i] = fToHexString(a1[i]);
+                }
+
+                //combine hex array for display
+                for (int i = 0; i < hexStringArrayOfChar.Length; i++)
+                {
+                    g = g + hexStringArrayOfChar[i];
+                }
+
+                //set variables and text box
+                hexArrayUnencrypted = hexStringArrayOfChar;
+                hexValueS = g;
+                hexValue.Text = g;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("You found an odd error. Please don't do that again.");
+            }
         }
 
         //encrypts hex message
         private void buttonEncrypt_Click(object sender, EventArgs e)
         {
-            valueE = BigInteger.Parse(tbValueE.Text);
-            valueN = BigInteger.Parse(tbValueN.Text);
-
-            char[] initialCArray = hexValueS.ToCharArray();
-            BigInteger[] n = new BigInteger[initialCArray.Length];
-            BigInteger[] q = new BigInteger[initialCArray.Length];
-            string myHex = "";
-
-            for (int i = 0; i < initialCArray.Length; i++)
+            try
             {
-                n[i] = BigInteger.Parse(initialCArray[i].ToString(), NumberStyles.HexNumber);
-            }
+                //variables
+                valueE = BigInteger.Parse(tbValueE.Text);
+                valueN = BigInteger.Parse(tbValueN.Text);
 
-            System.Diagnostics.Debug.WriteLine("");
-            for (int i = 0; i < initialCArray.Length; i++)
+                BigInteger[] n = new BigInteger[hexArrayUnencrypted.Length];
+                BigInteger[] q = new BigInteger[hexArrayUnencrypted.Length];
+                string myHex = "";
+
+                //parse hex array into BigInteger Array
+                for (int i = 0; i < hexArrayUnencrypted.Length; i++)
+                {
+                    n[i] = BigInteger.Parse(hexArrayUnencrypted[i].ToString(), NumberStyles.HexNumber);
+                }
+
+                //encrypt BigInteger Array by element
+                for (int i = 0; i < hexArrayUnencrypted.Length; i++)
+                {
+                    q[i] = encryptData(n[i], valueE, valueN);
+                }
+
+                //convert BigInteger array to a hex string and prep for display
+                for (int i = 0; i < hexArrayUnencrypted.Length; i++)
+                {
+                    myHex = myHex + q[i].ToString("x");
+                }
+
+                //variables and text box set
+                encryptedHex = myHex;
+                encryptionHex.Text = myHex;
+                repeatEncryptedHex.Text = myHex;
+                encryptedArray = q;
+            }
+            catch (Exception)
             {
-                q[i] = encryptData(n[i], valueE, valueN);
-                System.Diagnostics.Debug.Write(n[i]);
+                if (string.IsNullOrWhiteSpace(tbValueE.Text) || string.IsNullOrWhiteSpace(tbValueN.Text))
+                {
+                    MessageBox.Show("Value E or Value N have not been inputted.");
+                }
+                else if (string.IsNullOrWhiteSpace(hexValue.Text))
+                {
+                    MessageBox.Show("You need to convert a string to a hex value");
+                }
+                else
+                {
+                    MessageBox.Show("I don't know what error is here");
+                }            
             }
-
-            for (int i = 0; i < initialCArray.Length; i++)
-            {
-                myHex = myHex + q[i].ToString("X");
-            }
-            encryptedHex = myHex;
-
-            encryptionHex.Text = myHex;
-            repeatEncryptedHex.Text = myHex;
-            encryptedArray = q;
         }
 
         //decrypts hex message
         private void buttonDecrypt_Click(object sender, EventArgs e)
         {
-            valueD = BigInteger.Parse(tbValueD.Text);
-            valueN = BigInteger.Parse(tbValueN.Text);
-            char[] initialCArray = encryptedHex.ToCharArray();
-            BigInteger[] n = encryptedArray;
-            BigInteger[] finalArray = new BigInteger[encryptedArray.Length]; ;
-            string myHex = "";
-
-            System.Diagnostics.Debug.WriteLine("");
-            for (int i = 0; i < encryptedArray.Length; i++)
+            try
             {
-                finalArray[i] = decryptValue(n[i], valueD, valueN);
-            }
-            
-            for (int i = 0; i < encryptedArray.Length; i++)
-            {
-                myHex = myHex + finalArray[i].ToString("X");
-            }
-            decryptedHex = myHex;
+                //variables
+                valueD = BigInteger.Parse(tbValueD.Text);
+                valueN = BigInteger.Parse(tbValueN.Text);
 
-            decryptedHexBox.Text = myHex;
+                BigInteger[] n = encryptedArray;
+                BigInteger[] finalArray = new BigInteger[encryptedArray.Length]; ;
+                string myHex = "";
+
+                //decrypt BigInteger Array
+                for (int i = 0; i < encryptedArray.Length; i++)
+                {
+                    finalArray[i] = decryptValue(n[i], valueD, valueN);
+                }
+
+                //convert to hex
+                for (int i = 0; i < encryptedArray.Length; i++)
+                {
+                    myHex = myHex + finalArray[i].ToString("x");
+                }
+
+                //variables and text box
+                decryptedHex = myHex;
+                decryptedHexBox.Text = myHex;
+                decryptedArray = finalArray;
+            }
+            catch (Exception)
+            {
+                if (string.IsNullOrWhiteSpace(tbValueD.Text) || string.IsNullOrWhiteSpace(tbValueN.Text))
+                {
+                    MessageBox.Show("Value D or Value N have not been inputted.");
+                }
+                else if (string.IsNullOrWhiteSpace(repeatEncryptedHex.Text))
+                {
+                    MessageBox.Show("Please encrypt a value first");
+                }
+                else
+                {
+                    MessageBox.Show("I don't know what error is here");
+                } 
+            }
         }
 
         //converts decrypted hex message to string
         private void buttonToString_Click(object sender, EventArgs e)
         {
-            finalMessage = HexStringToString(decryptedHex);
-            decryptionMessage.Text = finalMessage;
+            try
+            {
+                string[] hexStringArray = new string[decryptedArray.Length];
+                string finalString = "";
+                for (int i = 0; i < hexStringArray.Length; i++)
+                {
+                    hexStringArray[i] = decryptedArray[i].ToString("x");
+                }
+
+                //convert to hex
+                for (int i = 0; i < encryptedArray.Length; i++)
+                {
+                    finalString = finalString + ConvertHexToString(hexStringArray[i]);
+                }
+
+                finalMessage = finalString;
+                decryptionMessage.Text = finalMessage;
+            }
+            catch (Exception)
+            {
+                if (string.IsNullOrWhiteSpace(decryptedHexBox.Text))
+                {
+                    MessageBox.Show("Decrypt a value first.");
+                }
+                else
+                {
+                    MessageBox.Show("This error probably comes from incorrect RSA values or some other error");
+                }
+            }
         }
+
 
         //encryption funciton
         private BigInteger encryptData(BigInteger a, BigInteger e, BigInteger n)
         {
             BigInteger encryptedValue = a;
-            encryptedValue = BigInteger.Pow(encryptedValue, (int)e) % n;
+            encryptedValue = BigInteger.ModPow(encryptedValue, e, n);
 
             return encryptedValue;
         }
@@ -148,7 +241,7 @@ namespace RSA_App
         private BigInteger decryptValue(BigInteger a, BigInteger d, BigInteger n)
         {
             BigInteger decryptedValue = a;
-            decryptedValue = BigInteger.Pow(decryptedValue, (int)d) % n;
+            decryptedValue = BigInteger.ModPow(decryptedValue, d, n);
 
             return decryptedValue;
         }
