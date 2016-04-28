@@ -64,6 +64,7 @@
             this.buttonExplain = new System.Windows.Forms.Button();
             this.buttonCalculateValues = new System.Windows.Forms.Button();
             this.buttonSync = new System.Windows.Forms.Button();
+            this.btnRSAWithoutHex = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -391,7 +392,7 @@
             // 
             // buttonExplain
             // 
-            this.buttonExplain.Location = new System.Drawing.Point(911, 553);
+            this.buttonExplain.Location = new System.Drawing.Point(911, 482);
             this.buttonExplain.Name = "buttonExplain";
             this.buttonExplain.Size = new System.Drawing.Size(210, 60);
             this.buttonExplain.TabIndex = 9;
@@ -401,7 +402,7 @@
             // 
             // buttonCalculateValues
             // 
-            this.buttonCalculateValues.Location = new System.Drawing.Point(911, 622);
+            this.buttonCalculateValues.Location = new System.Drawing.Point(911, 549);
             this.buttonCalculateValues.Name = "buttonCalculateValues";
             this.buttonCalculateValues.Size = new System.Drawing.Size(210, 60);
             this.buttonCalculateValues.TabIndex = 10;
@@ -419,11 +420,22 @@
             this.buttonSync.UseVisualStyleBackColor = true;
             this.buttonSync.Click += new System.EventHandler(this.buttonSync_Click);
             // 
+            // btnRSAWithoutHex
+            // 
+            this.btnRSAWithoutHex.Location = new System.Drawing.Point(911, 619);
+            this.btnRSAWithoutHex.Name = "btnRSAWithoutHex";
+            this.btnRSAWithoutHex.Size = new System.Drawing.Size(210, 60);
+            this.btnRSAWithoutHex.TabIndex = 12;
+            this.btnRSAWithoutHex.Text = "RSA without Hex";
+            this.btnRSAWithoutHex.UseVisualStyleBackColor = true;
+            this.btnRSAWithoutHex.Click += new System.EventHandler(this.btnRSAWithoutHex_Click);
+            // 
             // PrimaryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1133, 694);
+            this.Controls.Add(this.btnRSAWithoutHex);
             this.Controls.Add(this.buttonSync);
             this.Controls.Add(this.buttonCalculateValues);
             this.Controls.Add(this.buttonExplain);
@@ -483,6 +495,7 @@
         private System.Windows.Forms.TextBox tbValueD;
         private System.Windows.Forms.TextBox tbValueN;
         private System.Windows.Forms.TextBox tbValueE;
+        private System.Windows.Forms.Button btnRSAWithoutHex;
 
     }
 }

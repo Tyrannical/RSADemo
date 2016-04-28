@@ -27,7 +27,6 @@ namespace RSA_App
 
         BigInteger fNValue;
         BigInteger fDValue;
-        BigInteger fTValue;
         BigInteger fEValue;
 
         public ValueCalculateForm()
@@ -146,6 +145,7 @@ namespace RSA_App
                 Boolean coPrimeChecker = Coprime(tValue, eCheckVal);
                 Boolean totientChecker = false;
 
+
                 //checks for coprime and within range, if true performs calculations
                 if (1 < eCheckVal && eCheckVal < tValue)
                 {
@@ -164,27 +164,39 @@ namespace RSA_App
 
                     BigInteger qq = BigInteger.Multiply(tValue, nValue);
                     BigInteger qw = BigInteger.Multiply(tValue, qq);
-                    BigInteger d = BigInteger.ModPow(eCheckVal, (qw - 1), tValue);
+                    BigInteger d = BigInteger.ModPow(eCheckVal, (qw - 2), tValue);
 
-                    dValue = d;
-                    tbDValue.Text = d.ToString();
+                    dValue = BigInteger.Parse(tbDValue.Text);
+                    bool dAndeChecker = false;
+
+                    BigInteger checker = BigInteger.ModPow(BigInteger.Multiply(dValue, eValue), 1, tValue);
+
+                    if (checker == 1) { dAndeChecker = true; }
+
+                    if (dAndeChecker)
+                    {
+                         tbCheckE.Text = "Value e and d are good";
+                    }
+                    else
+                    {
+                        tbCheckE.Text = "Value e and d are bad";
+                    }
+                    //dValue = d;
+                    tbDValue.Text = dValue.ToString();
                     dCheck = 1;
 
                 }
                 else if (!coPrimeChecker && totientChecker)
                 {
                     tbCheckE.Text = "The value is NOT coprime and is between 1 and the totient";
-                    dCheck = 0;
                 }
                 else if (coPrimeChecker && !totientChecker)
                 {
                     tbCheckE.Text = "The value is coprime and is NOT between 1 and the totient";
-                    dCheck = 0;
                 }
                 else
                 {
                     tbCheckE.Text = "The value is NOT coprime and is NOT between 1 and the totient";
-                    dCheck = 0;
                 }
             }
             catch (Exception ex)
@@ -193,8 +205,8 @@ namespace RSA_App
                 if (string.IsNullOrWhiteSpace(tbEValue.Text)) { responseString = "No e value found; "; }
                 if (string.IsNullOrWhiteSpace(tbTValue.Text)) { responseString = responseString + "No t value found; "; }
                 if (string.IsNullOrWhiteSpace(tbNValue.Text)) { responseString = responseString + "No n value found; "; }
+                if (string.IsNullOrWhiteSpace(tbDValue.Text)) { responseString = responseString + "No d value found; "; }
                 MessageBox.Show(responseString);
-                MessageBox.Show(ex.Message.ToString());
             }
         }
 
@@ -209,13 +221,13 @@ namespace RSA_App
                     fDValue = dValue;
                     fEValue = eValue;
 
-                    PrimaryForm.variableValues.variableDValue = fDValue;
-                    PrimaryForm.variableValues.variableNValue = fNValue;
-                    PrimaryForm.variableValues.variableEValue = fEValue;
+                    globalVariables.variableDValue = fDValue;
+                    globalVariables.variableNValue = fNValue;
+                    globalVariables.variableEValue = fEValue;
 
-                    tbSendD.Text = fNValue.ToString();
+                    tbSendD.Text = fDValue.ToString();
                     tbSendN.Text = fNValue.ToString();
-                    tbSendE.Text = fNValue.ToString();
+                    tbSendE.Text = fEValue.ToString();
 
                     MessageBox.Show("The values have been placed in the global variables. Please push the sync button on the primary form.");
 
@@ -249,7 +261,7 @@ namespace RSA_App
                     MessageBox.Show("None of the values are correctly inputted");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Sending of variables failed");
             }
@@ -261,10 +273,12 @@ namespace RSA_App
             BigInteger a = 151;
             BigInteger b = 349;
             BigInteger c = 8219;
+            BigInteger d = 45779;
 
             textPrimeOne.Text = a.ToString();
             textPrimeTwo.Text = b.ToString();
             tbEValue.Text = c.ToString();
+            tbDValue.Text = d.ToString();
         }
 
         //medium prime numbers
@@ -273,10 +287,12 @@ namespace RSA_App
             BigInteger a = 65499743;
             BigInteger b = 324899387;
             BigInteger c = 724897567;
+            BigInteger d = BigInteger.Parse("431189203839839");
 
             textPrimeOne.Text = a.ToString();
             textPrimeTwo.Text = b.ToString();
             tbEValue.Text = c.ToString();
+            tbDValue.Text = d.ToString();
         }
 
         //large prime numbers
@@ -285,10 +301,12 @@ namespace RSA_App
             BigInteger a = 92489625259;
             BigInteger b = 424896219269;
             BigInteger c = 965495171351;
+            BigInteger d = BigInteger.Parse("11747526551953982329247");
 
             textPrimeOne.Text = a.ToString();
             textPrimeTwo.Text = b.ToString();
-            tbEValue.Text = c.ToString();
+            tbEValue.Text = c.ToString(); 
+            tbDValue.Text = d.ToString();
         }     
 
         

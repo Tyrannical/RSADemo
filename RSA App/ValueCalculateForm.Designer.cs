@@ -37,6 +37,8 @@
             this.buttonCheckPrime = new System.Windows.Forms.Button();
             this.textBoxPrimeRespone = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnLargePrime = new System.Windows.Forms.Button();
+            this.btnMediumPrime = new System.Windows.Forms.Button();
             this.btnSmallPrimes = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -63,8 +65,6 @@
             this.tbSendE = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tbSendN = new System.Windows.Forms.TextBox();
-            this.btnMediumPrime = new System.Windows.Forms.Button();
-            this.btnLargePrime = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -168,6 +168,26 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Prime Values";
             // 
+            // btnLargePrime
+            // 
+            this.btnLargePrime.Location = new System.Drawing.Point(176, 92);
+            this.btnLargePrime.Name = "btnLargePrime";
+            this.btnLargePrime.Size = new System.Drawing.Size(79, 39);
+            this.btnLargePrime.TabIndex = 11;
+            this.btnLargePrime.Text = "Large";
+            this.btnLargePrime.UseVisualStyleBackColor = true;
+            this.btnLargePrime.Click += new System.EventHandler(this.btnLargePrime_Click);
+            // 
+            // btnMediumPrime
+            // 
+            this.btnMediumPrime.Location = new System.Drawing.Point(91, 92);
+            this.btnMediumPrime.Name = "btnMediumPrime";
+            this.btnMediumPrime.Size = new System.Drawing.Size(79, 39);
+            this.btnMediumPrime.TabIndex = 10;
+            this.btnMediumPrime.Text = "Medium";
+            this.btnMediumPrime.UseVisualStyleBackColor = true;
+            this.btnMediumPrime.Click += new System.EventHandler(this.btnMediumPrime_Click);
+            // 
             // btnSmallPrimes
             // 
             this.btnSmallPrimes.Location = new System.Drawing.Point(6, 92);
@@ -226,7 +246,6 @@
             this.tbDValue.Location = new System.Drawing.Point(462, 261);
             this.tbDValue.Multiline = true;
             this.tbDValue.Name = "tbDValue";
-            this.tbDValue.ReadOnly = true;
             this.tbDValue.Size = new System.Drawing.Size(216, 28);
             this.tbDValue.TabIndex = 21;
             this.tbDValue.TabStop = false;
@@ -268,7 +287,7 @@
             this.buttonCheckE.Name = "buttonCheckE";
             this.buttonCheckE.Size = new System.Drawing.Size(90, 42);
             this.buttonCheckE.TabIndex = 9;
-            this.buttonCheckE.Text = "Check e";
+            this.buttonCheckE.Text = "Check e and d";
             this.buttonCheckE.UseVisualStyleBackColor = true;
             this.buttonCheckE.Click += new System.EventHandler(this.buttonCheckE_Click);
             // 
@@ -447,26 +466,6 @@
             this.tbSendN.Size = new System.Drawing.Size(180, 28);
             this.tbSendN.TabIndex = 16;
             this.tbSendN.TabStop = false;
-            // 
-            // btnMediumPrime
-            // 
-            this.btnMediumPrime.Location = new System.Drawing.Point(91, 92);
-            this.btnMediumPrime.Name = "btnMediumPrime";
-            this.btnMediumPrime.Size = new System.Drawing.Size(79, 39);
-            this.btnMediumPrime.TabIndex = 10;
-            this.btnMediumPrime.Text = "Medium";
-            this.btnMediumPrime.UseVisualStyleBackColor = true;
-            this.btnMediumPrime.Click += new System.EventHandler(this.btnMediumPrime_Click);
-            // 
-            // btnLargePrime
-            // 
-            this.btnLargePrime.Location = new System.Drawing.Point(176, 92);
-            this.btnLargePrime.Name = "btnLargePrime";
-            this.btnLargePrime.Size = new System.Drawing.Size(79, 39);
-            this.btnLargePrime.TabIndex = 11;
-            this.btnLargePrime.Text = "Large";
-            this.btnLargePrime.UseVisualStyleBackColor = true;
-            this.btnLargePrime.Click += new System.EventHandler(this.btnLargePrime_Click);
             // 
             // ValueCalculateForm
             // 

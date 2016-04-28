@@ -28,7 +28,7 @@ namespace RSA_App
             InitializeComponent();
         }
        
-        //converts a string to a hex string
+        //converts a string to a hexstring
         public static string fToHexString(string str)
         {
             byte[] ba = Encoding.Default.GetBytes(str);
@@ -38,6 +38,7 @@ namespace RSA_App
             return hexString.ToString();
         }
 
+        //hexstring to string
         public static string ConvertHexToString(string HexValue)
         {
             string StrValue = "";
@@ -270,16 +271,15 @@ namespace RSA_App
 
         private void buttonSync_Click(object sender, EventArgs e)
         {
-            tbValueD.Text = variableValues.variableDValue.ToString();
-            tbValueE.Text = variableValues.variableEValue.ToString();
-            tbValueN.Text = variableValues.variableNValue.ToString();
+            tbValueD.Text = globalVariables.variableDValue.ToString();
+            tbValueE.Text = globalVariables.variableEValue.ToString();
+            tbValueN.Text = globalVariables.variableNValue.ToString();
         }
 
-        public static class variableValues
+        private void btnRSAWithoutHex_Click(object sender, EventArgs e)
         {
-            public static BigInteger variableDValue { get; set; }
-            public static BigInteger variableEValue { get; set; }
-            public static BigInteger variableNValue { get; set; }
+            RSAEncryptionWithoutHex frmCalculate = new RSAEncryptionWithoutHex();
+            frmCalculate.Show();
         }
 
 
